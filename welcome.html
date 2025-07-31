@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Welcome Widget</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS starts here */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #000000; /* White background */
+            font-family: 'VT323', monospace; /* Digital font */
+            overflow: hidden;
+        }
+
+        #welcome-widget {
+            background-color: #000000; /* White widget background */
+            padding: 40px 60px;
+            border-radius: 5px; /* Slightly sharper corners for a framed look */
+            box-shadow: 0 0 0 3px #333, /* Inner frame/border */
+                        0 0 0 6px #ccc, /* Outer frame/border */
+                        0 4px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+            text-align: center;
+            color: #ffffff; /* Black text */
+        }
+
+        #welcome-widget h1 {
+            margin: 0;
+            font-size: 4em; /* Slightly larger for better readability with digital fonts */
+            font-weight: normal; /* Digital fonts often look better with normal weight */
+            letter-spacing: 5px; /* Increased letter-spacing for digital font clarity */
+            display: inline-block; /* Important for individual letter animation */
+        }
+
+        #welcome-widget h1 span {
+            display: inline-block; /* Make each letter a block-level element for animation */
+            animation: bounce 0.5s ease-in-out infinite alternate;
+            transform-origin: bottom; /* Make the bounce originate from the bottom of the letter */
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px); /* Adjust bounce height as needed */
+            }
+        }
+        /* CSS ends here */
+    </style>
+</head>
+<body>
+    <div id="welcome-widget">
+        <h1>Welcome</h1>
+    </div>
+
+    <script>
+        /* JavaScript starts here */
+        document.addEventListener('DOMContentLoaded', () => {
+            const welcomeWidget = document.querySelector('#welcome-widget h1');
+            const welcomeText = welcomeWidget.textContent;
+            welcomeWidget.textContent = ''; // Clear the original text
+
+            welcomeText.split('').forEach((letter, index) => {
+                const span = document.createElement('span');
+                span.textContent = letter;
+                span.style.animationDelay = `${index * 0.1}s`; // Add a slight delay for wave effect
+                welcomeWidget.appendChild(span);
+            });
+        });
+        /* JavaScript ends here */
+    </script>
+</body>
+</html>
