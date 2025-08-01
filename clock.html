@@ -8,23 +8,25 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
             height: 100vh;
             background-color: #000;
-            margin: 0;
+            margin:0;
             font-family: monospace;
             color: #fff;
+            
         }
         .clock-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-self: center;
         }
         .digital-clock-segments {
             display: flex;
-            gap: 15px;
+            flex-direction: row;
+            align-items:center;
+            gap: 5px;
             font-size: 3em;
-            margin-bottom: 40px;
+            margin-bottom: 0px;
         }
         .segment {
             display: flex;
@@ -38,23 +40,25 @@
         }
         .analog-bars {
             display: flex;
-            gap: 20px;
+            flex-direction: row;
+            gap: 40px;
         }
         .bar-container {
             position: relative;
-            width: 40px;
-            height: 150px;
+            width: 50px;
+            height: 25px;
             background-color: #333;
-            border-radius: 5px;
+            border-radius: 3px;
             overflow: hidden;
         }
         .bar {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
+            width:100%;
             background-color: #fff;
-            transition: height 0.5s ease-in-out;
+            transition: left 0.5s ease-in-out;
+          
         }
         #hours-bar {
             background-color: #fff;
