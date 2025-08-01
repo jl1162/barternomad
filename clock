@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog-Digital Clock 3</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+            font-family: monospace;
+            color: #fff;
+        }
+        .clock-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .digital-clock-segments {
+            display: flex;
+            gap: 15px;
+            font-size: 3em;
+            margin-bottom: 40px;
+        }
+        .segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .colon {
+            font-size: 1.5em;
+            align-self: flex-end;
+            margin-bottom: 5px;
+        }
+        .analog-bars {
+            display: flex;
+            gap: 20px;
+        }
+        .bar-container {
+            position: relative;
+            width: 40px;
+            height: 150px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            transition: height 0.5s ease-in-out;
+        }
+        #hours-bar {
+            background-color: #fff;
+        }
+        #minutes-bar {
+            background-color: #a0a0a0;
+        }
+        #seconds-bar {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-wrapper">
+        <div class="digital-clock-segments">
+            <div class="segment">
+                <span id="hours-display">00</span>
+            </div>
+            <div class="colon">:</div>
+            <div class="segment">
+                <span id="minutes-display">00</span>
+            </div>
+            <div class="colon">:</div>
+            <div class="segment">
+                <span id="seconds-display">00</span>
+            </div>
+        </div>
+        <div class="analog-bars">
+            <div class="bar-container">
+                <div class="bar" id="hours-bar"></div>
+            </div>
+            <div class="bar-container">
+                <div class="bar" id="minutes-bar"></div>
+            </div>
+            <div class="bar-container">
+                <div class="bar" id="seconds-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const hoursDisplay = document.getElementById('hours-display');
+        const minutesDisplay = document.getElementById('minutes-display');
+        const secondsDisplay = document.getElementById('seconds-display');
+
+        const hoursBar = document.getElementById('hours-bar');
+        const minutesBar = document.getElementById('minutes-bar');
+        const secondsBar = document.getElementById('seconds-bar');
+
+        function updateClock() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            // Digital display
+            const formattedHours = String(hours).padStart(2, '0');
+            const formattedMinutes = String(minutes).padStart(2, '0');
+            const formattedSeconds = String(seconds).padStart(2, '0');
+
+            hoursDisplay.textContent = formattedHours;
+            minutesDisplay.textContent = formattedMinutes;
+            secondsDisplay.textContent = formattedSeconds;
+
+            // Analog bar display
+            const secondsHeight = (seconds / 60) * 100;
+            const minutesHeight = (minutes / 60) * 100;
+            const hoursHeight = ((hours % 12) / 12) * 100;
+
+            secondsBar.style.height = `${secondsHeight}%`;
+            minutesBar.style.height = `${minutesHeight}%`;
+            hoursBar.style.height = `${hoursHeight}%`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
